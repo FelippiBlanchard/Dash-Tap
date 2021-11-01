@@ -7,24 +7,22 @@ public class PlayerDasher : DashController
 {
     [Space(10)]
     [Header("Events Collision")]
-    [SerializeField] private UnityEvent onCollisionATTACKER;
+    [SerializeField] private UnityEvent onKillATTACKER;
+    [SerializeField] private UnityEvent onKillPROTECTED;
     [SerializeField] private UnityEvent onCollisionPROTECTED;
+    [SerializeField] private UnityEvent onCollisionATTACKER;
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Colidiu");
         DashTapType.TYPE collisionType = collision.gameObject.gameObject.GetComponent<DashTapType>().GetTYPE();
         switch (collisionType)
         {
             case DashTapType.TYPE.ATTACKER:
-                Debug.Log("attacker");
                 OnCollisionATTACKER(collision.gameObject);
-                onCollisionATTACKER.Invoke();
                 break;
             case DashTapType.TYPE.PROTECTED:
-                Debug.Log("protected");
                 OnCollisionPROTECTED(collision.gameObject);
-                onCollisionPROTECTED.Invoke();
                 break;
         }
     }
@@ -35,9 +33,12 @@ public class PlayerDasher : DashController
         switch (mode)
         {
             case(MODE.DASHING):
+                onKillATTACKER.Invoke();
                 collisionObject.GetComponent<Death>().Die();
                 break;
             case (MODE.VULNERABLE):
+                onCollisionATTACKER.Invoke();
+                Debug.Log("morreu");
                 GetComponent<Death>().Die();
                 break;
         }
@@ -48,9 +49,11 @@ public class PlayerDasher : DashController
         switch (mode)
         {
             case (MODE.DASHING):
+                onKillPROTECTED.Invoke();
                 collisionObject.GetComponent<Death>().Die();
                 break;
             case (MODE.VULNERABLE):
+                onCollisionPROTECTED.Invoke();
                 break;
         }
     }

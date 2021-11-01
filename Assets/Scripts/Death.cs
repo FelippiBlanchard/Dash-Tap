@@ -5,11 +5,26 @@ using UnityEngine.Events;
 
 public class Death : MonoBehaviour
 {
-    [SerializeField] private float timeToDie;
+    [SerializeField] private float timeDying;
+
+    [SerializeField] private bool autoKill;
+    [SerializeField] private float timeToAutoKill;
 
     [Header("Events")]
     [SerializeField] private UnityEvent onDie;
 
+    private void Start()
+    {
+        if (autoKill)
+        {
+            StartCoroutine(AutoKillCoroutine());
+        }
+    }
+    private IEnumerator AutoKillCoroutine()
+    {
+        yield return new WaitForSeconds(timeToAutoKill);
+        Destroy(gameObject);
+    }
 
     public void Die()
     {
@@ -20,7 +35,7 @@ public class Death : MonoBehaviour
 
     private IEnumerator DeathCoroutine()
     {
-        yield return new WaitForSeconds(timeToDie);
+        yield return new WaitForSeconds(timeDying);
         Destroy(gameObject);
     }
 

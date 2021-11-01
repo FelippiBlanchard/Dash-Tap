@@ -11,6 +11,7 @@ public class AreaDash : MonoBehaviour, IPointerDownHandler
     public Vector2 positionLastClick;
     public static AreaDash Instance { get; private set; }
 
+
     private void Start()
     {
         Instance = this;
@@ -21,4 +22,6 @@ public class AreaDash : MonoBehaviour, IPointerDownHandler
         positionLastClick = eventData.position;
         onClick.Invoke();
     }
+
+
 }

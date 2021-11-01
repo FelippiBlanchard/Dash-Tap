@@ -32,6 +32,8 @@ public class DashController : MonoBehaviour
 
         if (isStateEnabled())
         {
+            if(coroutine != null) StopCoroutine(coroutine);
+
             coroutine = StartCoroutine(DashCoroutine(position));
         }
 
