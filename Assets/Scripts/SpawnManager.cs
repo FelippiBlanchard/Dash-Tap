@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
@@ -13,23 +14,26 @@ public class SpawnManager : MonoBehaviour
 
     private List<Coroutine> coroutinesSpawner = new List<Coroutine>();
 
-    private bool active;
+    private bool spawning;
 
 
     private void Start()
     {
-        InitializeCharacteristicsSpawn();
+        //InitializeCharacteristicsSpawn();
     }
 
     private void Update()
     {
+        /*
         if (active)
         {
             Count();
         }
+        */
     }
 
 
+    /*
     private void Count()
     {
         for (int i = 0; i < spawnList.Count; i++)
@@ -39,51 +43,77 @@ public class SpawnManager : MonoBehaviour
             TryChangeCharacteristics(spawnList[i]);
         }
     }
+    */
 
 
+    /*
     private void InitializeCharacteristicsSpawn()
     {
         foreach (var characteristics in spawnList)
         {
-            characteristics.currentCadenceSpawn = characteristics.initialCadenceSpawn;
-            characteristics.currentSpeed = characteristics.initialSpeed;
+            characteristics.currentCadenceSpawn = characteristics.curren;
+            characteristics.currentSpeed = characteristics.variationsSpeed[0].newSpeed;
         }
     }
+    */
 
 
-
-    private void TryChangeCharacteristics(CharacteristicsSpawn charSpawn)
+    private async void Initialize()
     {
-        if(charSpawn.stopwatchSpawn >= charSpawn.cadenceCadenceSpawn)
+
+        List<Task> tasks = new List<Task>();
+
+        foreach (var spawner in spawnList)
         {
-            if (charSpawn.currentCadenceSpawn >= charSpawn.minCadenceSpawn)
-            {
-                charSpawn.stopwatchSpawn = 0;
-                charSpawn.currentCadenceSpawn -= charSpawn.decreaserSpawn;
-            }
-            else
-            {
-                charSpawn.currentCadenceSpawn = charSpawn.minCadenceSpawn;
-            }
+
+            tasks.Add(VariateSpeed(spawner));
+            tasks.Add(VariateCadence(spawner));
         }
-        if(charSpawn.stopwatchSpeed >= charSpawn.cadenceSpeed)
-        {
-            if(charSpawn.currentSpeed <= charSpawn.maxSpeed)
-            {
-                charSpawn.stopwatchSpeed = 0;
-                charSpawn.currentSpeed += charSpawn.increaserSpeed;
-            }
-            else{
-                charSpawn.currentSpeed = charSpawn.maxSpeed;
-            }
-        }
+
+        await Task.WhenAll(tasks);
+
+
     }
 
 
 
+    private async Task VariateSpeed(CharacteristicsSpawn spawner)
+    {
+        float contador = 0f;
+        foreach (var settings in spawner.variationsSpeed.settings)
+        {
+            while (spawning && contador < settings.timeToVariate)
+            {
+                contador += Time.deltaTime;
+                await Task.Yield();
+            }
+
+            spawner.currentSpeed = settings.newValue;
+
+        }
+    }
+
+    private async Task VariateCadence(CharacteristicsSpawn spawner)
+    {
+        float contador = 0f;
+        foreach (var settings in spawner.variationsSpeed.settings)
+        {
+            while (spawning && contador < settings.timeToVariate)
+            {
+                contador += Time.deltaTime;
+                await Task.Yield();
+            }
+
+            spawner.currentCadenceSpawn = settings.newValue;
+
+        }
+    }
+
+
+    /*
     public void StartSpawn()
     {
-        active = true;
+        spawning = true;
         for(int i = 0; i < spawnList.Count; i++)
         {
             coroutinesSpawner.Add(StartCoroutine(SpawnCoroutine(i)));
@@ -91,12 +121,13 @@ public class SpawnManager : MonoBehaviour
     }
 
 
+    */
 
     private IEnumerator SpawnCoroutine(int index)
     {
         yield return new WaitForSeconds(timeToBegin);
 
-        while (true)
+        while (spawning)
         {
             SpawnGameObject(prefabList[index], GetRandomSpawner(), spawnList[index].currentSpeed);
             yield return new WaitForSeconds(spawnList[index].currentCadenceSpawn);
@@ -108,17 +139,16 @@ public class SpawnManager : MonoBehaviour
 
     public void StopSpawn()
     {
-        StopAllCoroutines();
-        active = false;
+        spawning = false;
     }
 
 
 
     private void SpawnGameObject(GameObject prefab, GameObject spawner, float speed)
     {
-        var attacker = Instantiate(prefab, spawner.transform);
+        var spawned = Instantiate(prefab, spawner.transform);
 
-        SetDirection(attacker, spawner.GetComponent<Spawner>().GetRandomAngle(), speed);
+        SetDirection(spawned, spawner.GetComponent<Spawner>().GetRandomAngle(), speed);
 
     }
 
@@ -127,6 +157,11 @@ public class SpawnManager : MonoBehaviour
     private void SetDirection(GameObject gameObject, int angle, float speed)
     {
         gameObject.GetComponent<Rigidbody2D>().velocity = speed * new Vector2(Mathf.Cos((Mathf.Deg2Rad * angle)), Mathf.Sin((Mathf.Deg2Rad * angle)));
+        if (angle < 90 || angle > 270)
+        {
+            var localscale = gameObject.transform.localScale;
+            gameObject.transform.localScale = new Vector2(-localscale.x, localscale.y);
+        }
     }
 
 
@@ -138,7 +173,6 @@ public class SpawnManager : MonoBehaviour
     }
 
 
-
 }
 
 [System.Serializable]
@@ -147,6 +181,12 @@ public class CharacteristicsSpawn
     [SerializeField] private string name;
 
     [Header("Speed settings")]
+    [SerializeField] public VariationSettings variationsSpeed;
+
+    [Header("Spawn settings")]
+    [SerializeField] public VariationSettings variationsCadence;
+
+    /*
     [SerializeField] public float initialSpeed;
     [SerializeField] public float maxSpeed;
     [SerializeField] public float increaserSpeed;
@@ -157,6 +197,7 @@ public class CharacteristicsSpawn
     [SerializeField] public float minCadenceSpawn;
     [SerializeField] public float decreaserSpawn;
     [SerializeField] public float cadenceCadenceSpawn;
+    */
 
     [Header("")]
     public float currentSpeed;
@@ -164,4 +205,21 @@ public class CharacteristicsSpawn
     public float stopwatchSpeed;
     public float stopwatchSpawn;
 
+}
+
+[System.Serializable]
+public class VariationSettings
+{
+
+    [SerializeField] private TypeVariation type;
+    [SerializeField] public List<Settings> settings;
+
+    public enum TypeVariation { Speed, Spawn}
+
+}
+[System.Serializable]
+public class Settings
+{
+    [SerializeField] public float timeToVariate;
+    [SerializeField] public float newValue;
 }

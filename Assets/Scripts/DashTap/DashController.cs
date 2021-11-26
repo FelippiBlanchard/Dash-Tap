@@ -23,18 +23,31 @@ public class DashController : MonoBehaviour
 
     [Space(20)]
 
+    [Header("Animations Settings")]
+    [SerializeField] private Image imageToColor;
+    [SerializeField] private Animator animator;
+
 
     private Coroutine coroutine;
 
     public void Dash()
     {
-        Vector2 position = AreaDash.Instance.positionLastClick;
+        Vector2 clickPosition = AreaDash.Instance.positionLastClick;
+
+        if(clickPosition.x > transform.position.x)
+        {
+            transform.localScale = new Vector2(-1,1);
+        }
+        else
+        {
+            transform.localScale = new Vector2(1, 1);
+        }
 
         if (isStateEnabled())
         {
             if(coroutine != null) StopCoroutine(coroutine);
 
-            coroutine = StartCoroutine(DashCoroutine(position));
+            coroutine = StartCoroutine(DashCoroutine(clickPosition));
         }
 
     }
@@ -64,9 +77,13 @@ public class DashController : MonoBehaviour
         switch (mode)
         {
             case MODE.DASHING:
+                imageToColor.color = Color.red;
+                animator.SetBool("Dashing", true);
                 onStartDash.Invoke();
                 break;
             case MODE.VULNERABLE:
+                imageToColor.color = Color.white;
+                animator.SetBool("Dashing", false);
                 onFinishDash.Invoke();
                 break;
             default:

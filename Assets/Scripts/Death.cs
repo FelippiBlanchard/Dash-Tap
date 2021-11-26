@@ -13,6 +13,8 @@ public class Death : MonoBehaviour
     [Header("Events")]
     [SerializeField] private UnityEvent onDie;
 
+    [SerializeField] public int layerLivingArea;
+
     private void Start()
     {
         if (autoKill)
@@ -37,6 +39,12 @@ public class Death : MonoBehaviour
     {
         yield return new WaitForSeconds(timeDying);
         Destroy(gameObject);
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == layerLivingArea) Destroy(gameObject);
+
     }
 
 }

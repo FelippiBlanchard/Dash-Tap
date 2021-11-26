@@ -17,6 +17,9 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI finalScoreText;
     [SerializeField] private TextMeshProUGUI finalBestScoreText;
 
+    [Header("Events")]
+    [SerializeField] private UnityEvent whenNewBestScore;
+
 
 
     public static ScoreManager Instance;
@@ -27,6 +30,18 @@ public class ScoreManager : MonoBehaviour
     private void Start()
     {
         Instance = this;
+    }
+
+    public void InitializeScore()
+    {
+        ResetCurrentScore();
+        GetBestScore();
+    }
+
+    public void InitializeFinalScore()
+    {
+        TrySetBestScore();
+        SetFinalScores();
     }
 
 
@@ -44,6 +59,9 @@ public class ScoreManager : MonoBehaviour
             bestScore = currentScore;
             bestScoreText.text = bestScore.ToString();
             PlayerPrefs.SetInt("BestScore", bestScore);
+
+            whenNewBestScore.Invoke();
+
         }
     }
 
