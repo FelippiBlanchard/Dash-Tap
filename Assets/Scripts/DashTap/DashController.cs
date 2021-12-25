@@ -9,6 +9,7 @@ public class DashController : MonoBehaviour
 {
 
     [Header("Dash Settings")]
+    [SerializeField] private bool isUI;
     [SerializeField] protected float timeDash;
     [SerializeField] protected float timeBeforeDash;
     [SerializeField] protected float timeAfterDash;
@@ -32,7 +33,11 @@ public class DashController : MonoBehaviour
 
     public void Dash()
     {
-        Vector2 clickPosition = AreaDash.Instance.positionLastClick;
+        Vector2 clickPosition;
+        if (isUI)
+            clickPosition = AreaDash.Instance.positionUILastClick;
+        else
+            clickPosition = AreaDash.Instance.positionWorldLastClick;
 
         if(clickPosition.x > transform.position.x)
         {

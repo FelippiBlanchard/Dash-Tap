@@ -8,7 +8,8 @@ public class AreaDash : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField] private UnityEvent onClick;
 
-    public Vector2 positionLastClick;
+    public Vector2 positionUILastClick;
+    public Vector2 positionWorldLastClick;
     public static AreaDash Instance { get; private set; }
 
 
@@ -19,7 +20,9 @@ public class AreaDash : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        positionLastClick = eventData.position;
+        positionUILastClick = eventData.position;
+        positionWorldLastClick = eventData.pointerCurrentRaycast.worldPosition;
+
         onClick.Invoke();
     }
 

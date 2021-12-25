@@ -58,26 +58,27 @@ public class SpawnManager : MonoBehaviour
     */
 
 
-    private async void Initialize()
+    public void Initialize()
     {
-
-        List<Task> tasks = new List<Task>();
+        spawning = true;
+        for (int i = 0; i < prefabList.Count; i++)
+        {
+            SpawnCoroutine(i);
+        }
 
         foreach (var spawner in spawnList)
         {
 
-            tasks.Add(VariateSpeed(spawner));
-            tasks.Add(VariateCadence(spawner));
+            VariateSpeed(spawner);
+            VariateCadence(spawner);
         }
-
-        await Task.WhenAll(tasks);
 
 
     }
 
 
 
-    private async Task VariateSpeed(CharacteristicsSpawn spawner)
+    private async void VariateSpeed(CharacteristicsSpawn spawner)
     {
         float contador = 0f;
         foreach (var settings in spawner.variationsSpeed.settings)
@@ -89,26 +90,24 @@ public class SpawnManager : MonoBehaviour
             }
 
             spawner.currentSpeed = settings.newValue;
-
         }
     }
 
-    private async Task VariateCadence(CharacteristicsSpawn spawner)
+    private async void VariateCadence(CharacteristicsSpawn spawner)
     {
         float contador = 0f;
-        foreach (var settings in spawner.variationsSpeed.settings)
+        foreach (var settings in spawner.variationsCadence.settings)
         {
             while (spawning && contador < settings.timeToVariate)
             {
                 contador += Time.deltaTime;
                 await Task.Yield();
-            }
+            }   
 
             spawner.currentCadenceSpawn = settings.newValue;
 
         }
     }
-
 
     /*
     public void StartSpawn()
@@ -123,14 +122,16 @@ public class SpawnManager : MonoBehaviour
 
     */
 
-    private IEnumerator SpawnCoroutine(int index)
+    private async void SpawnCoroutine(int index)
     {
-        yield return new WaitForSeconds(timeToBegin);
-
+        //yield return new WaitForSeconds(timeToBegin);
+        await Task.Delay((int)(timeToBegin * 1000));
         while (spawning)
         {
             SpawnGameObject(prefabList[index], GetRandomSpawner(), spawnList[index].currentSpeed);
-            yield return new WaitForSeconds(spawnList[index].currentCadenceSpawn);
+            //yield return new WaitForSeconds(spawnList[index].currentCadenceSpawn);
+            await Task.Delay((int)(spawnList[index].currentCadenceSpawn * 1000));
+
         }
 
     }
@@ -172,7 +173,10 @@ public class SpawnManager : MonoBehaviour
         return spawners[index];
     }
 
-
+    private void OnApplicationQuit()
+    {
+        spawning = false;
+    }
 }
 
 [System.Serializable]
