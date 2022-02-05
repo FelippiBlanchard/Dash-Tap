@@ -10,13 +10,11 @@ public class DashTapType : MonoBehaviour
         return type;
     }
 
-    private void OnEnable()
+    public void Desactive()
     {
-        if(type != TYPE.PLAYER)
-        {
-            
-        }
+        type = TYPE.NONE;
     }
 
-    public enum TYPE { PLAYER, ATTACKER, PROTECTED }
+
+    public enum TYPE { PLAYER, ATTACKER, PROTECTED, NONE }
 }

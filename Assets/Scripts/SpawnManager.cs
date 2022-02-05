@@ -8,6 +8,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private float timeToBegin;
 
     [SerializeField] private List<CharacteristicsSpawn> spawnList;
+    [SerializeField] private ScriptableCharacteristicSpawn characteristics;
     [SerializeField] private List<GameObject> prefabList;
 
     [SerializeField] private List<GameObject> spawners;

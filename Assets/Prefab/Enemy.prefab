@@ -182,7 +182,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeDying: 2
   autoKill: 0
-  timeToAutoKill: 2
+  timeToAutoKill: 3
   onDie:
     m_PersistentCalls:
       m_Calls:
@@ -213,6 +213,18 @@ MonoBehaviour:
       - m_Target: {fileID: 9124004149914510932}
         m_TargetAssemblyTypeName: UnityEngine.Rigidbody2D, UnityEngine
         m_MethodName: Sleep
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 831053002992630809}
+        m_TargetAssemblyTypeName: DashTapType, Assembly-CSharp
+        m_MethodName: Desactive
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
