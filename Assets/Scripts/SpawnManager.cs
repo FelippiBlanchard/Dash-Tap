@@ -7,7 +7,7 @@ public class SpawnManager : MonoBehaviour
 {
     [SerializeField] private float timeToBegin;
 
-    [SerializeField] private List<CharacteristicsSpawn> spawnList;
+    private List<CharacteristicsSpawn> spawnList;
     [SerializeField] private ScriptableCharacteristicSpawn characteristics;
     [SerializeField] private List<GameObject> prefabList;
 
@@ -17,7 +17,10 @@ public class SpawnManager : MonoBehaviour
 
     private bool spawning;
 
-
+    private void Awake()
+    {
+        spawnList = characteristics.spawnList;
+    }
     private void Start()
     {
         //InitializeCharacteristicsSpawn();

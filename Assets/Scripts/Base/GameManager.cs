@@ -5,48 +5,59 @@ using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Killer Mode")]
     [SerializeField] private UnityEvent onStart;
     [SerializeField] private UnityEvent onBegin;
     [SerializeField] private UnityEvent onLose;
-    [SerializeField] private UnityEvent onLoseDying;
-    [SerializeField] private UnityEvent onLoseKilling;
 
-    [SerializeField] private UnityEvent onPause;
-    [SerializeField] private UnityEvent onResume;
+    [Header("Campaign Mode")]
+    [SerializeField] private UnityEvent onStartC;
+    [SerializeField] private UnityEvent onBeginC;
+    [SerializeField] private UnityEvent onLoseC;
+
+
+    [SerializeField] private ScriptableModeGame mode;
 
     private static bool firstPlay = true;
 
     private void Start()
     {
-        onStart.Invoke();
+        switch (mode.mode)
+        {
+            case ScriptableModeGame.MODE.Killer:
+                onStart.Invoke();
+                break;
+            case ScriptableModeGame.MODE.Campaign:
+                onStartC.Invoke();
+                break;
+        }
         
     }
 
     public void Begin()
     {
-        onBegin.Invoke();
+        switch (mode.mode)
+        {
+            case ScriptableModeGame.MODE.Killer:
+                onBegin.Invoke();
+                break;
+            case ScriptableModeGame.MODE.Campaign:
+                onBeginC.Invoke();
+                break;
+        }
     }
-    private void Lose()
+    public void Lose()
     {
-        onLose.Invoke();
+        switch (mode.mode)
+        {
+            case ScriptableModeGame.MODE.Killer:
+                onLose.Invoke();
+                break;
+            case ScriptableModeGame.MODE.Campaign:
+                onLoseC.Invoke();
+                break;
+        }
     }
-    public void LoseDying()
-    {
-        Lose();
-        onLoseDying.Invoke();
-    }
-    public void LoseKilling()
-    {
-        Lose();
-        onLoseKilling.Invoke();
-    }
-    public void Pause()
-    {
-        onPause.Invoke();
-    }
-    public void Resume()
-    {
-        onResume.Invoke();
-    }
+
 
 }
