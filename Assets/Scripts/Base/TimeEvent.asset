@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 837e51552ece36b4aba97a056cab860a, type: 3}
-  m_Name: GameMode
+  m_Script: {fileID: 11500000, guid: f20f4025c3844264696c1fe4eb877486, type: 3}
+  m_Name: TimeEvent
   m_EditorClassIdentifier: 
-  mode: 1
+  events:
+  - m_PersistentCalls:
+      m_Calls: []

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5726857307504798141}
   - component: {fileID: 8773767549331638484}
   - component: {fileID: 5127788698228652158}
+  - component: {fileID: 7481239132625720816}
   m_Layer: 5
   m_Name: +score
   m_TagString: Untagged
@@ -34,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 99}
+  m_AnchoredPosition: {x: 27, y: 193}
   m_SizeDelta: {x: 79.56, y: 70.45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8773767549331638484
@@ -68,14 +69,14 @@ MonoBehaviour:
   m_text: +1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1dca75c12bd3e22448d076c73d76fdef, type: 2}
-  m_sharedMaterial: {fileID: 330730676447058870, guid: 1dca75c12bd3e22448d076c73d76fdef, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: c22b3ca0f3e36924baf659c37666e853, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4280352761
-  m_fontColor: {r: 0.9776841, g: 1, b: 0.12549019, a: 1}
+    rgba: 4294910052
+  m_fontColor: {r: 0.39367878, g: 0.12549019, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -92,8 +93,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 80
+  m_fontSizeBase: 80
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -128,9 +129,28 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -29.942562, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!95 &7481239132625720816
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8894886709255210978}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f09a3ef28cc850e41a04b21daf67104a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

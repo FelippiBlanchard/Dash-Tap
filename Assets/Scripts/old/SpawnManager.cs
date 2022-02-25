@@ -7,6 +7,7 @@ public class SpawnManager : MonoBehaviour
 {
     [SerializeField] private float timeToBegin;
 
+    //[SerializeField] 
     private List<CharacteristicsSpawn> spawnList;
     [SerializeField] private ScriptableCharacteristicSpawn characteristics;
     [SerializeField] private List<GameObject> prefabList;
@@ -85,6 +86,7 @@ public class SpawnManager : MonoBehaviour
     private async void VariateSpeed(CharacteristicsSpawn spawner)
     {
         float contador = 0f;
+        spawner.currentSpeed = spawner.variationsSpeed.settings[0].newValue;
         foreach (var settings in spawner.variationsSpeed.settings)
         {
             while (spawning && contador < settings.timeToVariate)
@@ -94,12 +96,14 @@ public class SpawnManager : MonoBehaviour
             }
 
             spawner.currentSpeed = settings.newValue;
+            Debug.Log(spawner.currentSpeed);
         }
     }
 
     private async void VariateCadence(CharacteristicsSpawn spawner)
     {
         float contador = 0f;
+        spawner.currentCadenceSpawn = spawner.variationsCadence.settings[0].newValue;
         foreach (var settings in spawner.variationsCadence.settings)
         {
             while (spawning && contador < settings.timeToVariate)
@@ -212,6 +216,7 @@ public class CharacteristicsSpawn
     public float currentCadenceSpawn;
     public float stopwatchSpeed;
     public float stopwatchSpawn;
+
 
 }
 

@@ -17,10 +17,10 @@ public class ScoreParticle : MonoBehaviour
     }
     public IEnumerator DestroyOBJ(GameObject obj)
     {
-        obj.transform.DOMoveY(target.position.y + 1, 1f);
-        yield return new WaitForSeconds(0.5f);
-        obj.GetComponent<TextMeshProUGUI>().DOFade(0f, 0.5f);
-        yield return new WaitForSeconds(0.5f);
+        obj.transform.DOMoveY(target.position.y + 1, 2f);
+        yield return new WaitForSeconds(1f);
+        obj.GetComponent<TextMeshProUGUI>().DOFade(0f, 1f);
+        yield return new WaitForSeconds(1f);
         Destroy(obj);
     }
 }

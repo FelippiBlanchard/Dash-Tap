@@ -24,9 +24,9 @@ MonoBehaviour:
       - timeToVariate: 15
         newValue: 4
       - timeToVariate: 20
-        newValue: 6
+        newValue: 5
       - timeToVariate: 40
-        newValue: 9
+        newValue: 6
     variationsCadence:
       type: 1
       settings:
@@ -37,11 +37,11 @@ MonoBehaviour:
       - timeToVariate: 15
         newValue: 1
       - timeToVariate: 20
-        newValue: 0.5
+        newValue: 0.7
       - timeToVariate: 40
-        newValue: 0.3
-    currentSpeed: 9
-    currentCadenceSpawn: 0.3
+        newValue: 0.45
+    currentSpeed: 6
+    currentCadenceSpawn: 0.45
     stopwatchSpeed: 0
     stopwatchSpawn: 0
   - name: PROTECTED
@@ -59,19 +59,19 @@ MonoBehaviour:
       - timeToVariate: 40
         newValue: 9
     variationsCadence:
-      type: 0
+      type: 1
       settings:
       - timeToVariate: 5
-        newValue: 4
+        newValue: 5
       - timeToVariate: 10
-        newValue: 3
+        newValue: 4
       - timeToVariate: 15
-        newValue: 2
+        newValue: 3
       - timeToVariate: 20
-        newValue: 1.5
+        newValue: 2.5
       - timeToVariate: 40
-        newValue: 0.8
+        newValue: 2
     currentSpeed: 9
-    currentCadenceSpawn: 0.8
+    currentCadenceSpawn: 2
     stopwatchSpeed: 0
     stopwatchSpawn: 0
