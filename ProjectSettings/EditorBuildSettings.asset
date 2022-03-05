@@ -8,9 +8,15 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Menu.unity
     guid: 11b53cef11e061744b45eebef94ad4e3
+  - enabled: 0
+    path: Assets/Scenes/Rework/PreScene.unity
+    guid: aa7ca333528e10946b1b79831e1ec9e7
+  - enabled: 1
+    path: Assets/Scenes/Rework/MenuScene.unity
+    guid: e20efb969a2795a4bada68fbea5a5e04
   - enabled: 1
     path: Assets/Scenes/GameKiller.unity
     guid: 9c202626ab5b489428dcf7bea38b81fd

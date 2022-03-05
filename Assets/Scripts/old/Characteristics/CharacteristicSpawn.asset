@@ -17,61 +17,71 @@ MonoBehaviour:
     variationsSpeed:
       type: 0
       settings:
-      - timeToVariate: 5
-        newValue: 2
       - timeToVariate: 10
-        newValue: 3
-      - timeToVariate: 15
-        newValue: 4
+        newValue: 2
       - timeToVariate: 20
-        newValue: 5
+        newValue: 3
+      - timeToVariate: 30
+        newValue: 4
       - timeToVariate: 40
+        newValue: 5
+      - timeToVariate: 60
         newValue: 6
+      - timeToVariate: 120
+        newValue: 7
     variationsCadence:
       type: 1
       settings:
       - timeToVariate: 5
-        newValue: 1.5
-      - timeToVariate: 10
-        newValue: 1.2
-      - timeToVariate: 15
         newValue: 1
-      - timeToVariate: 20
+      - timeToVariate: 10
+        newValue: 0.8
+      - timeToVariate: 15
         newValue: 0.7
+      - timeToVariate: 25
+        newValue: 0.5
       - timeToVariate: 40
-        newValue: 0.45
-    currentSpeed: 6
-    currentCadenceSpawn: 0.45
+        newValue: 0.3
+      - timeToVariate: 120
+        newValue: 0.15
+      - timeToVariate: 300
+        newValue: 0.075
+    currentSpeed: 7
+    currentCadenceSpawn: 0.15
     stopwatchSpeed: 0
     stopwatchSpawn: 0
   - name: PROTECTED
     variationsSpeed:
       type: 0
       settings:
-      - timeToVariate: 5
-        newValue: 2
       - timeToVariate: 10
-        newValue: 3
-      - timeToVariate: 15
-        newValue: 4
+        newValue: 2
       - timeToVariate: 20
-        newValue: 6
+        newValue: 3
+      - timeToVariate: 30
+        newValue: 4
       - timeToVariate: 40
-        newValue: 9
+        newValue: 5
+      - timeToVariate: 60
+        newValue: 6
     variationsCadence:
       type: 1
       settings:
-      - timeToVariate: 5
-        newValue: 5
       - timeToVariate: 10
-        newValue: 4
-      - timeToVariate: 15
-        newValue: 3
+        newValue: 20
       - timeToVariate: 20
-        newValue: 2.5
+        newValue: 15
+      - timeToVariate: 30
+        newValue: 10
+      - timeToVariate: 35
+        newValue: 8
       - timeToVariate: 40
+        newValue: 5
+      - timeToVariate: 120
         newValue: 2
-    currentSpeed: 9
+      - timeToVariate: 300
+        newValue: 0.5
+    currentSpeed: 6
     currentCadenceSpawn: 2
     stopwatchSpeed: 0
     stopwatchSpawn: 0
