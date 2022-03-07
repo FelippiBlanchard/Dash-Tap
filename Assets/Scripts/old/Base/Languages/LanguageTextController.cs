@@ -59,6 +59,6 @@ namespace Languages
         public string text;
         public Language language;
 
-        public enum Language { Portugues, Francais, English, Espanol }
+        public enum Language { Portuguese, French, English, Spanish }
     }
 }

@@ -62,7 +62,6 @@ public class AudioManager : MonoBehaviour
 
     public void Initialize()
     {
-        Debug.Log("a");
         var valueFX = PlayerPrefs.GetFloat("VolumeFX", defaultVolume);
         SetVolumeFXMixer(valueFX);
 
