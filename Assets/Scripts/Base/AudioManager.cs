@@ -18,6 +18,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private ToggleButton[] toggleFX;
     [SerializeField] private ToggleButton[] toggleBGM;
 
+    [SerializeField] private List<AudioSource> audioSources;
+
     private float defaultVolume = 0.45f;
 
     private bool enabledFX;
@@ -140,6 +142,36 @@ public class AudioManager : MonoBehaviour
             SetVolumeBGMMixer(value);
         }
     }
+
+
+    public void PauseAllAudios()
+    {
+        if(audioSources != null)
+        {
+            if(audioSources.Count > 0)
+            {
+                foreach (var audioSource in audioSources)
+                {
+                    audioSource.Pause();
+                }
+            }
+        }
+    }
+    public void UnPauseAllAudios()
+    {
+        if (audioSources != null)
+        {
+            if (audioSources.Count > 0)
+            {
+                foreach (var audioSource in audioSources)
+                {
+                    audioSource.UnPause();
+                }
+            }
+        }
+    }
+
+
 }
 
 [Serializable]
