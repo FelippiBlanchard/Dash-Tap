@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private ScriptableModeGame mode;
 
-    private static bool firstPlay = true;
 
     private void Start()
     {
